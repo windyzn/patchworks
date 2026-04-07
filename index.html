@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Patches</title>
+<title>Patchworks</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -164,21 +164,7 @@
   .progress-fill {
     height: 100%;
     border-radius: 999px;
-    background: repeating-linear-gradient(
-      90deg,
-      var(--teal) 0px,
-      var(--teal) 12px,
-      var(--pink) 12px,
-      var(--pink) 24px,
-      var(--gold) 24px,
-      var(--gold) 36px,
-      var(--lavender) 36px,
-      var(--lavender) 48px,
-      var(--navy) 48px,
-      var(--navy) 60px,
-      var(--orange) 60px,
-      var(--orange) 72px
-    );
+    background: var(--gold);
     transition: width 0.5s cubic-bezier(0.34,1.2,0.64,1);
   }
 
@@ -556,7 +542,7 @@
 
 <header class="app-header">
   <div class="app-logo">
-    <h1>Patches</h1>
+    <h1>Patchworks</h1>
     <span class="tagline">your monthly goal quilt</span>
   </div>
   <nav class="header-nav">
@@ -724,8 +710,8 @@ function loadBoard() {
 
 function renderBoard(board, key) {
   document.getElementById('board-title-display').textContent = formatMonthKey(key);
-  const total = board.cells.filter((_, i) => i !== 12).length;
-  const done  = board.cells.filter((c, i) => i !== 12 && c.done).length;
+  const total = board.cells.filter((c, i) => i !== 12 && c.text.trim()).length;
+  const done  = board.cells.filter((c, i) => i !== 12 && c.text.trim() && c.done).length;
   const pct   = total > 0 ? Math.round((done/total)*100) : 0;
   document.getElementById('board-stats-inline').textContent = `${done} of ${total} patches sewn · ${pct}%`;
   document.getElementById('progress-fill').style.width = pct + '%';
@@ -884,8 +870,8 @@ function renderStats() {
   }
   keys.forEach((key, idx) => {
     const board = boards[key];
-    const total = board.cells.filter((_, i) => i !== 12).length;
-    const done  = board.cells.filter((c, i) => i !== 12 && c.done).length;
+    const total = board.cells.filter((c, i) => i !== 12 && c.text.trim()).length;
+    const done  = board.cells.filter((c, i) => i !== 12 && c.text.trim() && c.done).length;
     const pct   = total > 0 ? Math.round((done/total)*100) : 0;
     const colour = STAT_COLOUR_LIST[idx % STAT_COLOUR_LIST.length];
     const card = document.createElement('div');
