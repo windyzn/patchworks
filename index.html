@@ -831,7 +831,7 @@ function renderGrid(board, key) {
     div.dataset.index = i;
 
     if (i === 12) {
-      div.innerHTML = `<span class="cell-emoji">🧵</span><span class="cell-text">FREE</span>`;
+      div.innerHTML = `<span class="cell-emoji">✦</span><span class="cell-text">FREE</span>`;
     } else if (editMode) {
       const ta = document.createElement('textarea');
       ta.value = cell.text;
