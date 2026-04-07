@@ -27,7 +27,7 @@ A personal monthly goal tracker styled as a patchwork quilt. Set up to 24 goals 
 ### Adding a new month
 1. Click **+ New Month**
 2. Select the month
-3. Enter your goals (tip: start each with an emoji — e.g. `🏃 Run the Sun Run`)
+3. Enter your goals (tip: start each with an emoji — e.g. `🏃 Run 5k`)
 4. Click **Stitch it together** — goals are shuffled and your board is created
 
 ### Marking goals complete
