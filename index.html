@@ -467,6 +467,20 @@
   }
   .goal-input-wrap input[type="text"]::placeholder { color: var(--ink-faint); }
 
+  .suggest-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  .suggest-hint {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    font-weight: 600;
+    font-style: italic;
+    transition: opacity 0.2s;
+  }
+
   .wizard-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
 
   /* ── EMPTY STATE ── */
@@ -578,8 +592,11 @@
         <label>Month</label>
         <input type="month" id="new-month-input" />
       </div>
-      <div class="hint">💡 Start each goal with an emoji — e.g. <strong>🏃 Run 5k</strong></div>
       <div class="goals-form-grid" id="goals-form-grid"></div>
+      <div class="suggest-row">
+        <button class="btn btn-outline btn-sm" type="button" onclick="suggestGoal()">✦ Suggest a goal</button>
+        <span class="suggest-hint" id="suggest-hint"></span>
+      </div>
       <div class="wizard-actions">
         <button class="btn" onclick="createBoard()">Stitch it together ✦</button>
         <button class="btn btn-outline" onclick="hideWizard()">Cancel</button>
@@ -643,7 +660,69 @@ function shuffle(arr) {
   return a;
 }
 
-// ── STATE ──────────────────────────────────────────────────────────────
+// ── GOAL POOL ──────────────────────────────────────────────────────────
+const GOAL_POOL = shuffle([
+  // Movement
+  '🏃 Go for a run', '🚴 Bike somewhere new', '🧘 Do a yoga session', '🏊 Swim laps',
+  '🥾 Go on a hike', '🏸 Try a new shot at badminton', '💃 Dance it out',
+  '🚶 Take a long walk outside', '🧗 Try a new physical activity', '🤸 Do a stretching routine',
+  // Baking & cooking
+  '🍰 Bake something for friends', '🍜 Cook a recipe you\'ve never tried', '🥖 Bake a loaf of bread',
+  '🍪 Make cookies from scratch', '🧁 Try a new baking technique', '🫙 Make something to gift',
+  '🥗 Meal prep for the week', '🍳 Cook a proper Sunday breakfast', '🫕 Make a big pot of something cozy',
+  // Creative
+  '🧶 Start a new knitting project', '🪡 Finish a WIP', '✍️ Fill a journal page',
+  '📸 Take photos intentionally', '🎨 Make something with your hands', '🖼️ Frame something you love',
+  '🪴 Press some flowers', '🎵 Listen to a full album start to finish',
+  // Social
+  '📞 Call someone you\'ve been meaning to reach', '☕ Have a proper catch-up over coffee',
+  '🎉 Plan a get-together', '💌 Send a handwritten note', '🍽️ Host a dinner',
+  '🎂 Celebrate someone\'s win', '👯 Make plans with a friend you haven\'t seen in a while',
+  // Home
+  '🧹 Deep clean one room', '🌱 Check on the garden', '🪴 Repot a plant',
+  '📦 Tackle one box or pile', '🛋️ Rearrange something to freshen up a space',
+  '🕯️ Make the home feel cozy — candles, tidying, the works',
+  // Self-care
+  '💆 Book a massage', '🛁 Take a proper bath', '📵 One full screen-free evening',
+  '😴 Prioritise a full night\'s sleep all week', '🦷 Book an overdue appointment',
+  '🌙 Have a slow morning with no rush', '🧴 Do a proper skincare evening',
+  // Relationship
+  '💑 Plan a date — you organise it', '🌸 Do something spontaneous together',
+  '📝 Write down something you appreciate about your partner',
+  '🎬 Watch a film you\'ve both been putting off',
+  // Reading & learning
+  '📖 Finish a book', '📚 Start a book that\'s been on your list', '🗞️ Read longform — no scrolling',
+  '🎧 Listen to a podcast start to finish', '🌐 Learn one new thing properly',
+  // Life admin
+  '💰 Sort out a financial task you\'ve been avoiding', '📋 Finish your taxes',
+  '📁 Clear your inbox', '🗓️ Plan out the next month', '✈️ Book something to look forward to',
+  // Nature & outdoors
+  '🌧️ Go for a walk in the rain', '🌅 Watch a sunrise or sunset', '🌿 Spend an afternoon outside',
+  '🌻 Visit a garden or park you\'ve never been to',
+]);
+let goalPoolIndex = 0;
+
+function suggestGoal() {
+  // Find next empty input slot
+  let slotNum = null;
+  for (let i = 1; i <= 24; i++) {
+    if (!document.getElementById(`goal-${i}`).value.trim()) { slotNum = i; break; }
+  }
+  if (slotNum === null) {
+    document.getElementById('suggest-hint').textContent = 'All slots are filled!';
+    return;
+  }
+  if (goalPoolIndex >= GOAL_POOL.length) {
+    document.getElementById('suggest-hint').textContent = 'No more suggestions — you\'ve seen them all!';
+    return;
+  }
+  const goal = GOAL_POOL[goalPoolIndex++];
+  document.getElementById(`goal-${slotNum}`).value = goal;
+  document.getElementById('suggest-hint').textContent = `→ added to slot ${slotNum}`;
+  setTimeout(() => document.getElementById('suggest-hint').textContent = '', 2000);
+}
+
+
 let editMode = false;
 
 // ── STORAGE ────────────────────────────────────────────────────────────
@@ -819,6 +898,8 @@ function showNewBoardWizard() {
   document.getElementById('new-board-wizard').style.display = 'block';
   buildGoalsForm();
   setDefaultMonth();
+  goalPoolIndex = 0;
+  document.getElementById('suggest-hint').textContent = '';
   setTimeout(() => document.getElementById('goal-1').focus(), 50);
 }
 
