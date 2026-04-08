@@ -216,12 +216,12 @@
   .cell.empty-cell { opacity: 0.3; cursor: default; }
 
   /* Text */
-  .cell-emoji { font-size: 1.3rem; line-height: 1; }
+  .cell-emoji { font-size: 1.75rem; line-height: 1; }
   .cell-text {
     font-family: 'Nunito', sans-serif;
     font-weight: 700;
-    font-size: 0.58rem;
-    line-height: 1.3;
+    font-size: 0.78rem;
+    line-height: 1.35;
     color: var(--navy);
     word-break: break-word;
     hyphens: auto;
@@ -559,10 +559,34 @@
   .modal p { font-size: 0.85rem; color: var(--ink-soft); font-weight: 600; }
   .modal-actions { display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 1.25rem; }
 
-  @media (max-width: 600px) {
+  @media print {
+    body { background: white; }
+    .app-header, .month-bar, .board-stats-inline,
+    .board-actions, .progress-wrap, #tab-stats,
+    #toast, .modal-overlay { display: none !important; }
+    .main-content { padding: 0; max-width: 100%; }
+    .board-title {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      text-align: center;
+    }
+    .bingo-grid { gap: 6px; }
+    .cell {
+      box-shadow: none;
+      border: 2px dashed #c8c0a8;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .cell.done {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+
+
     .main-content { padding: 1rem; }
-    .cell-emoji { font-size: 1rem; }
-    .cell-text { font-size: 0.52rem; }
+    .cell-emoji { font-size: 1.3rem; }
+    .cell-text { font-size: 0.62rem; }
     .bingo-grid { gap: 6px; }
     .goals-form-grid { grid-template-columns: 1fr; }
     .board-title { font-size: 1.35rem; }
@@ -861,6 +885,7 @@ function renderBoardActions(key) {
   c.innerHTML = editMode
     ? `<button class="btn btn-sm" onclick="saveEdit('${key}')">Save</button>`
     : `<button class="btn btn-sm btn-outline" onclick="startEdit('${key}')">Edit Goals</button>
+       <button class="btn btn-sm btn-outline" onclick="window.print()">Print</button>
        <button class="btn btn-sm btn-ghost" onclick="confirmDeleteBoard('${key}')">Delete</button>`;
 }
 
