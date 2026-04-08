@@ -568,17 +568,25 @@
       margin-bottom: 0.75rem;
       text-align: center;
     }
-    .bingo-grid { gap: 6px; }
+    .bingo-grid {
+      gap: 4px;
+      container-type: normal;
+    }
     .cell {
       box-shadow: none;
       border: 2px dashed #c8c0a8;
+      overflow: visible;
+      container-type: normal;
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }
+    .cell-emoji { font-size: 0.9rem; }
+    .cell-text { font-size: 0.55rem; line-height: 1.2; }
     .cell.done {
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }
+    .cell.done::before { display: none; }
   }
 
   @media (max-width: 600px) {
