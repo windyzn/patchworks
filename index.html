@@ -207,12 +207,8 @@
 
   /* FREE square */
   .cell.free {
-    background: var(--navy);
-    border: 2px solid var(--navy);
     cursor: default;
   }
-  .cell.free .cell-emoji { filter: brightness(10); }
-  .cell.free .cell-text { color: white; }
 
   /* Empty cell */
   .cell.empty-cell { opacity: 0.3; cursor: default; }
@@ -847,7 +843,7 @@ function renderGrid(board, key) {
     const isEmpty = i !== 12 && !cell.text.trim();
 
     let classes = 'cell';
-    if (i === 12)       classes += ' free';
+    if (i === 12)       classes += ' free done ' + patchClass(cell.patch);
     else if (isEmpty)   classes += ' empty-cell';
     else if (cell.done) classes += ' done ' + patchClass(cell.patch);
     if (editMode && i !== 12) classes += ' edit-mode';
