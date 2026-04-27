@@ -205,15 +205,9 @@
     border-color: var(--ink-soft);
   }
 
-  /* FREE square */
-  .cell.free {
-    cursor: default;
-  }
-
-  /* Empty cell */
+  .cell.free { cursor: default; }
   .cell.empty-cell { opacity: 0.3; cursor: default; }
 
-  /* Text — scales with cell width via container queries */
   .cell-emoji { font-size: 13cqi; line-height: 1; }
   .cell-text {
     font-family: 'Nunito', sans-serif;
@@ -225,16 +219,9 @@
     hyphens: auto;
   }
 
-  /* ── PATCH PATTERNS (done state) ── */
-  /* Each pattern uses CSS backgrounds. Colour + pattern assigned per-cell. */
+  /* ── PATCH PATTERNS ── */
+  .cell.done { border-style: solid; border-width: 3px; cursor: pointer; }
 
-  .cell.done {
-    border-style: solid;
-    border-width: 3px;
-    cursor: pointer;
-  }
-
-  /* Pattern: gingham */
   .patch-gingham-navy    { background-color: #e8ebf8; border-color: var(--navy);
     background-image: repeating-linear-gradient(0deg, rgba(43,58,143,0.18) 0, rgba(43,58,143,0.18) 4px, transparent 4px, transparent 16px),
                       repeating-linear-gradient(90deg, rgba(43,58,143,0.18) 0, rgba(43,58,143,0.18) 4px, transparent 4px, transparent 16px); }
@@ -254,7 +241,6 @@
     background-image: repeating-linear-gradient(0deg, rgba(232,98,42,0.18) 0, rgba(232,98,42,0.18) 4px, transparent 4px, transparent 16px),
                       repeating-linear-gradient(90deg, rgba(232,98,42,0.18) 0, rgba(232,98,42,0.18) 4px, transparent 4px, transparent 16px); }
 
-  /* Pattern: diagonal stripes */
   .patch-stripe-navy    { background-color: #e8ebf8; border-color: var(--navy);
     background-image: repeating-linear-gradient(45deg, rgba(43,58,143,0.18) 0, rgba(43,58,143,0.18) 3px, transparent 3px, transparent 10px); }
   .patch-stripe-pink    { background-color: #fce8ef; border-color: var(--pink);
@@ -268,7 +254,6 @@
   .patch-stripe-orange  { background-color: #fdeee7; border-color: var(--orange);
     background-image: repeating-linear-gradient(45deg, rgba(232,98,42,0.22) 0, rgba(232,98,42,0.22) 3px, transparent 3px, transparent 10px); }
 
-  /* Pattern: polka dots */
   .patch-dot-navy    { background-color: #e8ebf8; border-color: var(--navy);
     background-image: radial-gradient(circle, rgba(43,58,143,0.3) 2px, transparent 2px);
     background-size: 10px 10px; }
@@ -288,7 +273,6 @@
     background-image: radial-gradient(circle, rgba(232,98,42,0.3) 2px, transparent 2px);
     background-size: 10px 10px; }
 
-  /* Pattern: crosshatch */
   .patch-cross-navy    { background-color: #e8ebf8; border-color: var(--navy);
     background-image: repeating-linear-gradient(0deg, rgba(43,58,143,0.15) 0, rgba(43,58,143,0.15) 1.5px, transparent 1.5px, transparent 9px),
                       repeating-linear-gradient(90deg, rgba(43,58,143,0.15) 0, rgba(43,58,143,0.15) 1.5px, transparent 1.5px, transparent 9px); }
@@ -308,7 +292,6 @@
     background-image: repeating-linear-gradient(0deg, rgba(232,98,42,0.18) 0, rgba(232,98,42,0.18) 1.5px, transparent 1.5px, transparent 9px),
                       repeating-linear-gradient(90deg, rgba(232,98,42,0.18) 0, rgba(232,98,42,0.18) 1.5px, transparent 1.5px, transparent 9px); }
 
-  /* Pattern: diamond / argyle */
   .patch-diamond-navy    { background-color: #e8ebf8; border-color: var(--navy);
     background-image: repeating-linear-gradient(45deg, rgba(43,58,143,0.15) 0, rgba(43,58,143,0.15) 1.5px, transparent 1.5px, transparent 9px),
                       repeating-linear-gradient(-45deg, rgba(43,58,143,0.15) 0, rgba(43,58,143,0.15) 1.5px, transparent 1.5px, transparent 9px); }
@@ -328,7 +311,6 @@
     background-image: repeating-linear-gradient(45deg, rgba(232,98,42,0.18) 0, rgba(232,98,42,0.18) 1.5px, transparent 1.5px, transparent 9px),
                       repeating-linear-gradient(-45deg, rgba(232,98,42,0.18) 0, rgba(232,98,42,0.18) 1.5px, transparent 1.5px, transparent 9px); }
 
-  /* Pattern: wide stripe */
   .patch-wstripe-navy    { background-color: #e8ebf8; border-color: var(--navy);
     background-image: repeating-linear-gradient(0deg, rgba(43,58,143,0.14) 0, rgba(43,58,143,0.14) 6px, transparent 6px, transparent 14px); }
   .patch-wstripe-pink    { background-color: #fce8ef; border-color: var(--pink);
@@ -342,11 +324,9 @@
   .patch-wstripe-orange  { background-color: #fdeee7; border-color: var(--orange);
     background-image: repeating-linear-gradient(0deg, rgba(232,98,42,0.18) 0, rgba(232,98,42,0.18) 6px, transparent 6px, transparent 14px); }
 
-  /* Done cell text colours */
   .cell.done .cell-text  { color: #3a3a5c; }
   .cell.done .cell-emoji { opacity: 0.85; }
 
-  /* Stitch corner decorations on done cells */
   .cell.done::before {
     content: '';
     position: absolute;
@@ -356,7 +336,6 @@
     pointer-events: none;
   }
 
-  /* Edit mode */
   .cell.edit-mode { cursor: default; }
   .cell.edit-mode textarea {
     width: 100%; height: 100%;
@@ -372,7 +351,6 @@
     border-radius: 14px;
   }
 
-  /* Bingo flash */
   @keyframes patchPop {
     0%   { transform: scale(1); }
     35%  { transform: scale(1.15) rotate(2deg); }
@@ -381,7 +359,6 @@
   }
   .cell.bingo-flash { animation: patchPop 0.55s ease; }
 
-  /* Sew-in animation for completing a cell */
   @keyframes sewIn {
     0%   { transform: scale(0.85) rotate(-3deg); opacity: 0.5; }
     60%  { transform: scale(1.06) rotate(1deg); }
@@ -431,6 +408,93 @@
     box-sizing: border-box;
   }
 
+  /* ── CARRYOVER SECTION ── */
+  .carryover-section {
+    background: #eef0fa;
+    border-radius: 14px;
+    padding: 1rem 1.1rem;
+    margin-bottom: 1.25rem;
+    border: 1.5px dashed var(--ink-faint);
+  }
+  .carryover-toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .carryover-toggle-row label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.82rem;
+    color: var(--navy);
+    cursor: pointer;
+    text-transform: none;
+    letter-spacing: 0;
+    display: inline;
+    margin-bottom: 0;
+  }
+  .carryover-sub {
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    font-weight: 600;
+    margin-left: 2rem;
+    margin-top: 0.2rem;
+  }
+
+  /* pill toggle switch */
+  .toggle-switch {
+    position: relative;
+    width: 38px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+  .toggle-switch input { opacity: 0; width: 0; height: 0; }
+  .toggle-track {
+    position: absolute;
+    inset: 0;
+    background: var(--ink-faint);
+    border-radius: 999px;
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+  .toggle-track::after {
+    content: '';
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 16px; height: 16px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+  .toggle-switch input:checked + .toggle-track { background: var(--navy); }
+  .toggle-switch input:checked + .toggle-track::after { transform: translateX(16px); }
+
+  .carryover-picker {
+    margin-top: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .carryover-picker label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0;
+    display: inline;
+  }
+  .carryover-count {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--teal);
+    font-family: 'Nunito', sans-serif;
+  }
+
   .hint {
     font-size: 0.75rem;
     color: var(--ink-soft);
@@ -459,6 +523,8 @@
     transition: border-color 0.15s, box-shadow 0.15s;
   }
   .goal-input-wrap:focus-within { border-color: var(--navy); box-shadow: 0 0 0 3px rgba(43,58,143,0.08); }
+  .goal-input-wrap.carried-over { border-color: var(--teal); background: #f0fbfa; }
+  .goal-input-wrap.carried-over .goal-num { color: var(--teal); }
   .goal-num { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 0.63rem; color: var(--ink-faint); min-width: 1rem; text-align: right; }
   .goal-input-wrap input[type="text"] {
     border: none; background: transparent; padding: 0.22rem 0; margin: 0;
@@ -524,7 +590,6 @@
     overflow: hidden;
   }
 
-  /* little colour tab */
   .stat-card-accent {
     position: absolute; top: 0; left: 0; right: 0;
     height: 5px; border-radius: 18px 18px 0 0;
@@ -563,29 +628,16 @@
     .board-actions, .progress-wrap, #tab-stats,
     #toast, .modal-overlay { display: none !important; }
     .main-content { padding: 0; max-width: 100%; }
-    .board-title {
-      font-size: 1.4rem;
-      margin-bottom: 0.75rem;
-      text-align: center;
-    }
-    .bingo-grid {
-      gap: 4px;
-      container-type: normal;
-    }
+    .board-title { font-size: 1.4rem; margin-bottom: 0.75rem; text-align: center; }
+    .bingo-grid { gap: 4px; container-type: normal; }
     .cell {
-      box-shadow: none;
-      border: 2px dashed #c8c0a8;
-      overflow: visible;
-      container-type: normal;
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
+      box-shadow: none; border: 2px dashed #c8c0a8;
+      overflow: visible; container-type: normal;
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
     }
     .cell-emoji { font-size: 0.9rem; }
     .cell-text { font-size: 0.55rem; line-height: 1.2; }
-    .cell.done {
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
+    .cell.done { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .cell.done::before { display: none; }
   }
 
@@ -632,14 +684,33 @@
     <div class="wizard-card">
       <h2>New Month 🧵</h2>
       <p class="wizard-subtitle">Add up to 24 goals — they'll be shuffled into your quilt. Leave any blank to fill in later.</p>
+
       <div class="month-input-row">
         <label>Month</label>
         <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
-          <input type="month" id="new-month-input" />
+          <input type="month" id="new-month-input" onchange="onNewMonthChange()" />
           <button class="btn-suggest" type="button" onclick="suggestGoal()" title="Suggest a goal">✦</button>
           <span class="suggest-hint" id="suggest-hint"></span>
         </div>
       </div>
+
+      <!-- Carryover section — only shown when other boards exist -->
+      <div class="carryover-section" id="carryover-section" style="display:none;">
+        <div class="carryover-toggle-row" onclick="toggleCarryover()">
+          <label class="toggle-switch" onclick="event.stopPropagation()">
+            <input type="checkbox" id="carryover-toggle" onchange="toggleCarryover()" />
+            <span class="toggle-track"></span>
+          </label>
+          <label for="carryover-toggle">Carry over unfinished goals?</label>
+        </div>
+        <div class="carryover-sub">Import incomplete goals from a previous month into empty slots.</div>
+        <div class="carryover-picker" id="carryover-picker" style="display:none;">
+          <label>From</label>
+          <select id="carryover-source" onchange="applyCarryover()"></select>
+          <span class="carryover-count" id="carryover-count"></span>
+        </div>
+      </div>
+
       <div class="goals-form-grid" id="goals-form-grid"></div>
       <div class="wizard-actions">
         <button class="btn" onclick="createBoard()">Stitch it together ✦</button>
@@ -689,12 +760,8 @@ function randomPatch() {
     colour:  COLOURS[Math.floor(Math.random()  * COLOURS.length)],
   };
 }
+function patchClass(patch) { return `patch-${patch.pattern}-${patch.colour}`; }
 
-function patchClass(patch) {
-  return `patch-${patch.pattern}-${patch.colour}`;
-}
-
-// Fisher-Yates shuffle
 function shuffle(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -706,48 +773,37 @@ function shuffle(arr) {
 
 // ── GOAL POOL ──────────────────────────────────────────────────────────
 const GOAL_POOL = shuffle([
-  // Movement
   '🏃 Go for a run', '🚴 Bike somewhere new', '🧘 Do a yoga session', '🏊 Swim laps',
   '🥾 Go on a hike', '🏸 Try a new shot at badminton', '💃 Dance it out',
   '🚶 Take a long walk outside', '🧗 Try a new physical activity', '🤸 Do a stretching routine',
-  // Baking & cooking
   '🍰 Bake something for friends', '🍜 Cook a recipe you\'ve never tried', '🥖 Bake a loaf of bread',
   '🍪 Make cookies from scratch', '🧁 Try a new baking technique', '🫙 Make something to gift',
   '🥗 Meal prep for the week', '🍳 Cook a proper Sunday breakfast', '🫕 Make a big pot of something cozy',
-  // Creative
   '🧶 Start a new knitting project', '🪡 Finish a WIP', '✍️ Fill a journal page',
   '📸 Take photos intentionally', '🎨 Make something with your hands', '🖼️ Frame something you love',
   '🪴 Press some flowers', '🎵 Listen to a full album start to finish',
-  // Social
   '📞 Call someone you\'ve been meaning to reach', '☕ Have a proper catch-up over coffee',
   '🎉 Plan a get-together', '💌 Send a handwritten note', '🍽️ Host a dinner',
   '🎂 Celebrate someone\'s win', '👯 Make plans with a friend you haven\'t seen in a while',
-  // Home
   '🧹 Deep clean one room', '🌱 Check on the garden', '🪴 Repot a plant',
   '📦 Tackle one box or pile', '🛋️ Rearrange something to freshen up a space',
   '🕯️ Make the home feel cozy — candles, tidying, the works',
-  // Self-care
   '💆 Book a massage', '🛁 Take a proper bath', '📵 One full screen-free evening',
   '😴 Prioritise a full night\'s sleep all week', '🦷 Book an overdue appointment',
   '🌙 Have a slow morning with no rush', '🧴 Do a proper skincare evening',
-  // Relationship
   '💑 Plan a date — you organise it', '🌸 Do something spontaneous together',
   '📝 Write down something you appreciate about your partner',
   '🎬 Watch a film you\'ve both been putting off',
-  // Reading & learning
   '📖 Finish a book', '📚 Start a book that\'s been on your list', '🗞️ Read longform — no scrolling',
   '🎧 Listen to a podcast start to finish', '🌐 Learn one new thing properly',
-  // Life admin
   '💰 Sort out a financial task you\'ve been avoiding', '📋 Finish your taxes',
   '📁 Clear your inbox', '🗓️ Plan out the next month', '✈️ Book something to look forward to',
-  // Nature & outdoors
   '🌧️ Go for a walk in the rain', '🌅 Watch a sunrise or sunset', '🌿 Spend an afternoon outside',
   '🌻 Visit a garden or park you\'ve never been to',
 ]);
 let goalPoolIndex = 0;
 
 function suggestGoal() {
-  // Find next empty input slot
   let slotNum = null;
   for (let i = 1; i <= 24; i++) {
     if (!document.getElementById(`goal-${i}`).value.trim()) { slotNum = i; break; }
@@ -765,7 +821,6 @@ function suggestGoal() {
   document.getElementById('suggest-hint').textContent = `→ added to slot ${slotNum}`;
   setTimeout(() => document.getElementById('suggest-hint').textContent = '', 2000);
 }
-
 
 let editMode = false;
 
@@ -798,6 +853,7 @@ function buildGoalsForm() {
   for (let i = 1; i <= 24; i++) {
     const wrap = document.createElement('div');
     wrap.className = 'goal-input-wrap';
+    wrap.id = `goal-wrap-${i}`;
     wrap.innerHTML = `<span class="goal-num">${i}</span><input type="text" id="goal-${i}" placeholder="Goal ${i}…" autocomplete="off" />`;
     grid.appendChild(wrap);
   }
@@ -899,7 +955,6 @@ function toggleCell(idx, key) {
   board.cells[idx].done = !board.cells[idx].done;
   LS.saveBoard(key, board);
   renderBoard(board, key);
-  // Sew-in animation on completion
   if (board.cells[idx].done) {
     const el = document.querySelector(`.cell[data-index="${idx}"]`);
     if (el) { el.classList.add('sew-in'); setTimeout(() => el.classList.remove('sew-in'), 400); }
@@ -945,6 +1000,11 @@ function showNewBoardWizard() {
   setDefaultMonth();
   goalPoolIndex = 0;
   document.getElementById('suggest-hint').textContent = '';
+  // Reset carryover UI
+  document.getElementById('carryover-toggle').checked = false;
+  document.getElementById('carryover-picker').style.display = 'none';
+  document.getElementById('carryover-count').textContent = '';
+  setupCarryoverSection();
   setTimeout(() => document.getElementById('goal-1').focus(), 50);
 }
 
@@ -953,6 +1013,89 @@ function hideWizard() {
   loadBoard();
 }
 
+// ── CARRYOVER ─────────────────────────────────────────────────────────
+function setupCarryoverSection() {
+  const all = LS.allBoards();
+  const keys = Object.keys(all).sort().reverse();
+  const section = document.getElementById('carryover-section');
+  if (keys.length === 0) { section.style.display = 'none'; return; }
+  section.style.display = 'block';
+
+  // Populate source dropdown, defaulting to most recent board
+  const sel = document.getElementById('carryover-source');
+  const newMonthKey = document.getElementById('new-month-input').value;
+  const filtered = keys.filter(k => k !== newMonthKey);
+  if (filtered.length === 0) { section.style.display = 'none'; return; }
+
+  sel.innerHTML = filtered.map(k => `<option value="${k}">${formatMonthKey(k)}</option>`).join('');
+}
+
+function onNewMonthChange() {
+  // If carryover is on, refresh the source dropdown to exclude the new selection
+  setupCarryoverSection();
+  if (document.getElementById('carryover-toggle').checked) {
+    applyCarryover();
+  }
+}
+
+function toggleCarryover() {
+  const chk = document.getElementById('carryover-toggle');
+  // If called from the row div (not the checkbox itself), toggle manually
+  if (event && event.target !== chk) chk.checked = !chk.checked;
+
+  const picker = document.getElementById('carryover-picker');
+  if (chk.checked) {
+    picker.style.display = 'flex';
+    applyCarryover();
+  } else {
+    picker.style.display = 'none';
+    document.getElementById('carryover-count').textContent = '';
+  }
+}
+
+function getIncompleteGoals(boardKey) {
+  const board = LS.getBoard(boardKey);
+  if (!board) return [];
+  return board.cells
+    .filter((c, i) => i !== 12 && c.text.trim() && !c.done)
+    .map(c => c.text.trim());
+}
+
+function applyCarryover() {
+  const sourceKey = document.getElementById('carryover-source').value;
+  if (!sourceKey) return;
+
+  const goals = getIncompleteGoals(sourceKey);
+  let filled = 0;
+
+  for (const goal of goals) {
+    for (let i = 1; i <= 24; i++) {
+      const inp = document.getElementById(`goal-${i}`);
+      if (!inp.value.trim()) {
+        inp.value = goal;
+        // Mark the wrap with carried-over style
+        const wrap = document.getElementById(`goal-wrap-${i}`);
+        if (wrap) wrap.classList.add('carried-over');
+        filled++;
+        break;
+      }
+    }
+  }
+
+  const countEl = document.getElementById('carryover-count');
+  if (goals.length === 0) {
+    countEl.textContent = 'No incomplete goals found';
+    countEl.style.color = 'var(--ink-soft)';
+  } else if (filled === 0) {
+    countEl.textContent = 'All slots already filled';
+    countEl.style.color = 'var(--ink-soft)';
+  } else {
+    countEl.textContent = `${filled} goal${filled !== 1 ? 's' : ''} carried over`;
+    countEl.style.color = 'var(--teal)';
+  }
+}
+
+// ── CREATE BOARD ───────────────────────────────────────────────────────
 function createBoard() {
   const monthKey = document.getElementById('new-month-input').value;
   if (!monthKey) { toast('Please select a month!'); return; }
@@ -960,12 +1103,10 @@ function createBoard() {
 
   const texts = Array.from({length: 24}, (_, i) => (document.getElementById(`goal-${i+1}`).value || '').trim());
 
-  // Shuffle non-empty goals, keep empty slots at end
   const filled = texts.filter(t => t);
   const empty  = texts.filter(t => !t);
   const shuffled = [...shuffle(filled), ...empty];
 
-  // Build 25-cell board with FREE at index 12, each cell gets a random patch style
   const first12 = shuffled.slice(0, 12);
   const last12  = shuffled.slice(12, 24);
 
